@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ product.merek }} {{ product.model }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img src="{{ product.imageUrl }}"></ion-img>
+  <hr style="margin-top:0px;height:2px;border-width:0;color:red;background-color:red">
+  <ion-label>
+    <ion-text>
+      <h2>{{ product.merek }} {{ product.model }}</h2>
+    </ion-text>
+    <h3>{{ product.price | currency:'Rp. ':'symbol':'3.0' }}</h3>
+    <ion-text>
+      <h4>Tersedia : {{ product.stok | number }}</h4>
+      <hr style="height:2px;border-width:0;color:white;background-color:white">
+
+      <ion-text *ngIf="product.type === 'Processor'">
+        <h2>Tentang Produk</h2>
+        <br/>
+        <p>Base Clock: {{ product.baseClock}} Ghz</p>
+        <p>Boost Clock: {{ product.boostClock}} Ghz</p>
+        <p>Jumlah Core: {{ product.core}}</p>
+        <p>Jumlah Thread: {{ product.thread}}</p>
+      </ion-text>
+      <ion-text *ngIf="product.type === 'Motherboard'">
+        <h2>Tentang Produk</h2>
+        <br/>
+        <p>Chipset: {{ product.chipset}}</p>
+        <p>Socket: {{ product.tipeProcessor}}</p>
+      </ion-text>
+      <ion-text *ngIf="product.type === 'RAM'">
+        <h2>Tentang Produk</h2>
+        <br/>
+        <p>Speed: {{ product.speed}} MHz</p>
+        <p>Ukuran: {{ product.ukuran}} GB</p>
+      </ion-text>
+    </ion-text>
+  </ion-label>
+</ion-content>

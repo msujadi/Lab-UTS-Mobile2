@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end"  [routerLink]="['/admin']">
+      <ion-button slot="start" color="danger">Cancel</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button slot="start" (click)="product.valid && logForm()" [disabled]="!product.valid" >Done</ion-button>
+    </ion-buttons>
+    <ion-title>Tambah Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="product" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label position="stacked">URL Foto</ion-label>
+      <ion-input type="text" formControlName="imageUrl"></ion-input>
+    </ion-item>
+    <hr style="height:2px;border-width:0;color:white;background-color:white">
+    <ion-item>
+      <ion-label position="stacked">Jenis</ion-label>
+      <ion-select placeholder="Tipe Produk" formControlName="type" (ionChange)="changeTipe($event)">
+        <ion-select-option value="Processor">Processor</ion-select-option>
+        <ion-select-option value="GPU">GPU</ion-select-option>
+        <ion-select-option value="Motherboard">Motherboard</ion-select-option>
+        <ion-select-option value="RAM">RAM</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nama</ion-label>
+      <ion-input type="text" formControlName="merek"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Model</ion-label>
+      <ion-input type="text" formControlName="model"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Harga</ion-label>
+      <ion-input type="number" formControlName="price">Rp. </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Stok</ion-label>
+      <ion-input type="number" formControlName="stok"></ion-input>
+    </ion-item>
+    <hr style="height:2px;border-width:0;color:white;background-color:white">
+    <div *ngIf="selected === 'Processor'">
+      <ion-item>
+        <ion-label position="stacked">Base Clock</ion-label>
+        <ion-input type="number" formControlName="baseClock"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Boost Clock</ion-label>
+        <ion-input type="number" formControlName="boostClock"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Core</ion-label>
+        <ion-input type="number" formControlName="core"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Thread</ion-label>
+        <ion-input type="number" formControlName="thread"></ion-input>
+      </ion-item>
+    </div>
+    <div *ngIf="selected === 'Motherboard'">
+      <ion-item>
+        <ion-label position="stacked">Chipset</ion-label>
+        <ion-input type="text" formControlName="chipset"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Tipe Processor</ion-label>
+        <ion-input type="text" formControlName="tipeProcessor"></ion-input>
+      </ion-item>
+    </div>
+    <div *ngIf="selected === 'RAM'">
+      <ion-item>
+        <ion-label position="stacked">Speed</ion-label>
+        <ion-input type="number" formControlName="speed"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Ukuran</ion-label>
+        <ion-input type="number" formControlName="ukuran"></ion-input>
+      </ion-item>
+    </div>
+  </form>
+</ion-content>

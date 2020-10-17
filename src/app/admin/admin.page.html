@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="shopMenu" autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end"  [routerLink]="['./add']">
+      <ion-icon slot="start"  *ngIf="!multiSelect" size="large" name="add-outline"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon slot="start" (click)="multiSelect = !multiSelect" *ngIf="!multiSelect" size="large" name="checkbox-outline"></ion-icon>
+    </ion-buttons>
+    <ion-buttons *ngIf="multiSelect" slot="end">
+      <ion-button slot="start" color="danger" (click)="multiSelect = !multiSelect; prodList.length = 0">Cancel</ion-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="multiSelect" slot="end">
+      <ion-button slot="start"  [disabled]="prodList.length === 0" (click)="massDelete()" >Delete</ion-button>
+    </ion-buttons>
+    <ion-title>
+      Admin
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf="products == undefined || products.length == 0">
+    tidak ada
+  </ion-list>
+  <ion-list>
+    <ion-item-sliding *ngFor="let product of products; index as i" #slidingItem>
+      <ion-item-options side="start" [routerLink]="['./edit/', product.id]" >
+        <ion-item-option >
+          <ion-icon  name="pencil-outline" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item  [routerLink]="multiSelect ? null : ['./edit', product.id]">
+        <ion-thumbnail slot="start">
+          <ion-img src="{{ product.imageUrl }}"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <ion-text>
+            <h3>{{ product.merek }} {{ product.model }}</h3>
+          </ion-text>
+          <p>{{ product.price | currency:'Rp. ':'symbol':'3.0' }}</p>
+          <ion-text>
+            <p>Tersedia : {{ product.stok | number }}</p>
+          </ion-text>
+        </ion-label>
+        <ion-checkbox *ngIf="multiSelect" (click)="addToList(product.id)"></ion-checkbox>
+
+      </ion-item>
+  
+      <ion-item-options side="end">
+        <ion-item-option (click)="delete(product, slidingItem)" color="danger">
+          <ion-buttons >
+            <ion-icon size="large" name="trash-outline"></ion-icon>
+          </ion-buttons>
+      </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+

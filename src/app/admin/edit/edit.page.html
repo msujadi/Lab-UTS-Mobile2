@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end"  [routerLink]="['/admin']">
+      <ion-button slot="start" color="danger">Cancel</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button slot="start" (click)="product.valid && logForm()" [disabled]="!product.valid" >Done</ion-button>
+    </ion-buttons>
+    <ion-title>Edit Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="product" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label position="stacked">URL Foto</ion-label>
+      <ion-input type="text" formControlName="imageUrl" [(ngModel)]="editedProduct.imageUrl"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Jenis</ion-label>
+      <ion-text *ngIf="selected === 'Processor'">Processor</ion-text>
+      <ion-text *ngIf="selected === 'GPU'">GPU</ion-text>
+      <ion-text *ngIf="selected === 'Motherboard'">Motherboard</ion-text>
+      <ion-text *ngIf="selected === 'RAM'">RAM</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nama</ion-label>
+      <ion-input type="text" formControlName="merek" [(ngModel)] = "editedProduct.merek"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Model</ion-label>
+      <ion-input type="text" formControlName="model" [(ngModel)] = "editedProduct.model"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Harga</ion-label>
+      <ion-input type="number" formControlName="price" [(ngModel)] = "editedProduct.price">Rp. </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Stok</ion-label>
+      <ion-input type="number" formControlName="stok" [(ngModel)] = "editedProduct.stok"></ion-input>
+    </ion-item>
+    <div *ngIf="selected === 'Processor'">
+      <ion-item>
+        <ion-label position="stacked">Base Clock</ion-label>
+        <ion-input type="number" formControlName="baseClock" [(ngModel)] = "editedProduct.baseClock"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Boost Clock</ion-label>
+        <ion-input type="number" formControlName="boostClock" [(ngModel)] = "editedProduct.boostClock"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Core</ion-label>
+        <ion-input type="number" formControlName="core" [(ngModel)] = "editedProduct.core"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Thread</ion-label>
+        <ion-input type="number" formControlName="thread" [(ngModel)] = "editedProduct.thread"></ion-input>
+      </ion-item>
+    </div>
+    <div *ngIf="selected === 'Motherboard'">
+      <ion-item>
+        <ion-label position="stacked">Chipset</ion-label>
+        <ion-input type="text" formControlName="chipset" [(ngModel)] = "editedProduct.chipset"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Tipe Processor</ion-label>
+        <ion-input type="text" formControlName="tipeProcessor" [(ngModel)] = "editedProduct.tipeProcessor"></ion-input>
+      </ion-item>
+    </div>
+    <div *ngIf="selected === 'RAM'">
+      <ion-item>
+        <ion-label position="stacked">Speed</ion-label>
+        <ion-input type="number" formControlName="speed" [(ngModel)] = "editedProduct.speed"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Ukuran</ion-label>
+        <ion-input type="number" formControlName="ukuran" [(ngModel)] = "editedProduct.ukuran"></ion-input>
+      </ion-item>
+    </div>
+  </form>
+</ion-content>
